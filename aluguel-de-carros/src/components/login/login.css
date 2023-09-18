@@ -1,0 +1,76 @@
+.Divp{
+    margin: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.FixCollum{
+    display: flex;
+    flex-direction: row;
+}
+form{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    width: 400px;
+    background-color: #87CEEB;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+label{
+    margin: 0.5rem 0;
+    color: white;
+    font-size: 20px;
+    font-weight: bold
+}
+input{
+    width: 100%;
+    padding: 0.2rem;
+    border-radius: 10px;
+    border-color: transparent;
+}
+.Submit{
+    padding: 1rem;
+    color: white;
+    margin-top: 1rem;
+    transition: .3s all;
+    font-size: 17px;
+    background-color: gray;
+}
+.Submit:hover{
+    background-color: #3498db;
+}
+.ParalaxDiv {
+    /* The image used */
+    background-image: url("../../img/car.jpg");
+    background-color: yellow;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    /* Set a specific height */
+    width: 400px;
+    height: 400px;
+  
+    /* Create the parallax scrolling effect */
+
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size:auto;
+    display: flex;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+  }
+  h1{
+   color: white; 
+   text-align: center;
+   width: 100%;
+  }
+  a {
+    margin: 0.5rem 0;
+  }
