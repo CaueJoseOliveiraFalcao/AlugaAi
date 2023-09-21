@@ -45,7 +45,6 @@ input{
 }
 .ParalaxDiv {
     background-image: url("../../img/car.jpg");
-    background-color: yellow;
     padding: 1.5rem;
     border-radius: 10px;
     border-bottom-right-radius: 0;

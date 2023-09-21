@@ -1,6 +1,6 @@
 
 import './login.css';
-const  Login = () => {
+const Login = () => {
   return (
     
     <div className='Divp'>
@@ -18,7 +18,7 @@ const  Login = () => {
         <input type="email" />
         <label htmlFor="password">Password  </label>
         <input type="password" />
-        <a href="">Don't have a login? Click Here</a>
+        <a href="/register">Don't have a login? Click Here</a>
         <input className='Submit' type="submit" value="Submit" />
       </form>
       </div>
