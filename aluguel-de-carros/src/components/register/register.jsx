@@ -1,6 +1,5 @@
-
-import './login.css';
-const  Login = () => {
+import './register.css';
+const  Register = () => {
   return (
     
     <div className='Divp'>
@@ -11,7 +10,7 @@ const  Login = () => {
         <p>The Car Rent</p>
       </div>
       <form>
-        <h1>Login Page</h1>
+        <h1>Register Page</h1>
         <label htmlFor="Name">Name  </label>
         <input type="text" />
         <label htmlFor="Email">Email  </label>
@@ -26,4 +25,4 @@ const  Login = () => {
   );
 }
 
-export default Login;
+export default Register;

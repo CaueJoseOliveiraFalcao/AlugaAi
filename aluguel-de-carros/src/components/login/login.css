@@ -1,5 +1,5 @@
 .Divp{
-    margin: 8rem;
+    margin: 15rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,18 +44,14 @@ input{
     background-color: #3498db;
 }
 .ParalaxDiv {
-    /* The image used */
     background-image: url("../../img/car.jpg");
     background-color: yellow;
     padding: 1.5rem;
     border-radius: 10px;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    /* Set a specific height */
     width: 400px;
     height: 400px;
-  
-    /* Create the parallax scrolling effect */
 
     background-position:center;
     background-repeat: no-repeat;
@@ -72,5 +68,8 @@ input{
    width: 100%;
   }
   a {
-    margin: 0.5rem 0;
+    margin: 1rem 0;
+    text-decoration: none;
+    color: white;
+
   }
