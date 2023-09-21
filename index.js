@@ -22,7 +22,20 @@ app.post('/addUser' , (req , res) => {
         res.json({ message : 'Usuario adicionado com succeso'});
     }])
 })
+app.post('/login' , (req , res) => {
+    const {email , password} = req.body;
+    const sqlComand = 'SELECT * FROM users WHERE email = ? AND password = ?';
+    db.query(sqlComand , [email ,password , (err , result) => {
+        if (err) {
+            console.error('Error ao buscar usuario' , err);
+        }
+        if (result.length === 0) {
+            return res.status(401).json({ err: 'Credenciais inválidas' });
+        }
+        res.json({ message: 'Login bem-sucedido', user, token });
+    }])
 
+})
 
 
 app.get('/showcars' , (req , res) => {
