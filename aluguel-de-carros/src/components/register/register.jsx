@@ -1,5 +1,6 @@
 import axios from 'axios';
 import './register.css';
+import { useNavigate } from 'react-router-dom'
 import React , { useState } from 'react';
 const  Register = () => {
   const [FormData , SetFormData] = useState({
@@ -7,21 +8,18 @@ const  Register = () => {
     email : '',
     password : ''
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) =>{
     const {name , value} = e.target;
     SetFormData({...FormData, [name] :value});
   }
   const handleSubmit = (e) =>{
     e.preventDefault(e);
-    axios
-    .post("http://localhost:3030/addUser" , FormData)
-    .then((response) => {
-      console.log(response.data.message);
+    axios.post('http://localhost:8081/signup' , FormData)
+    .then(res =>  {
+      navigate('/');
     })
-    .catch((error) => {
-      console.log(error)
-    })
+    .catch(err => console.log(err));
   
   }
   return (

@@ -1,53 +1,46 @@
 const express = require('express');
-const db = require('./db');
-const app = express();
+const mysql = require('mysql2');
 const cors = require('cors');
-const port = 3030;
-app.use(cors())
+
+const app = express();
+app.use(cors());
 app.use(express.json());
 
-app.post('/addUser' , (req , res) => {
-    const {username , email , password} = req.body;
-
-    if (!username || !password || !email){
-        return res.status(400).json({ error : 'Todos os campos são obrigatorios.'});
-    }
-    const sqlComandLine =  'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-    db.query(sqlComandLine ,[username , password , email , (err , result) => {
-        if (err) {
-            console.error("Error ao adicioar o usuario " , err);
-            return res.status[500].json({error : 'Error ao adicionar usuario'});
-        }
-
-        res.json({ message : 'Usuario adicionado com succeso'});
-    }])
+const db = mysql.createConnection({
+        host : 'localhost',
+        user : 'root',
+        password : 'C4u3j0s3',
+        database : 'aluga'
 })
-app.post('/login' , (req , res) => {
-    const {email , password} = req.body;
-    const sqlComand = 'SELECT * FROM users WHERE email = ? AND password = ?';
-    db.query(sqlComand , [email ,password , (err , result) => {
-        if (err) {
-            console.error('Error ao buscar usuario' , err);
+app.post('/signup' , (req , res) => {
+    const sql = 'INSERT INTO users (`username` , `email` , `password`) VALUES (?)';
+    const values = [
+        req.body.username,
+        req.body.email,
+        req.body.password
+    ];
+    db.query(sql , [values] , (err , data) => {
+        if(err){
+            console.error(err); 
+            return res.status(500).json({ error: "Error" });
         }
-        if (result.length === 0) {
-            return res.status(401).json({ err: 'Credenciais inválidas' });
-        }
-        res.json({ message: 'Login bem-sucedido', user, token });
-    }])
-
-})
-
-
-app.get('/showcars' , (req , res) => {
-    db.query('SELECT * FROM cars WHERE cardisponible = 1' , (err , results) => {
-        if (err) {
-            console.log('erro ao buscar carros')
-            res.status(500).json({error : 'Error ao buscar carro'});
-            return
-        }
-        console.log(res.json(results))
+        return res.json(data);
     })
 })
-app.listen(port , () =>{
-    console.log('FOI' , port)
+app.post('/login' , (req , res) => {
+    const sql = 'SELECT * FROM users WHERE `email` = ? AND `password` = ?';
+    db.query(sql , [req.body.email,req.body.password] , (err , data) => {
+        if(err){
+            console.error(err); 
+            return res.status(500).json({ error: "Error" });
+        }
+        if (data.length > 0){
+            return res.json('Sucess');
+        } else {
+            return res.json("Faile");
+        }
+    })
+})
+app.listen(8081 , ()=> {
+    console.log('foi')
 })

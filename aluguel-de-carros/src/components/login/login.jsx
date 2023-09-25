@@ -1,26 +1,27 @@
 import { useState } from 'react';
 import './login.css'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const Login = () => {
   const [FormData , SetFormData] = useState({
     email : '',
     password : ''
   });
+  const navigate = useNavigate()
   const handleChange = (e) =>{
     const {name , value} = e.target;
     SetFormData({...FormData, [name] :value});
+    console.log(FormData);
   }
   const handleSubmit = (e) =>{
-    e.preventDefault(e);
-    axios
-    .post("http://localhost:3030/login" , FormData)
-    .then((response) => {
-      console.log(response.data.message);
+    
+    e.preventDefault();
+    
+    axios.post('http://localhost:8081/login' , FormData)
+    .then(res =>  {
+      navigate('/register');
     })
-    .catch((error) => {
-      console.log(error)
-    })
-  
+    .catch(err => console.log(err));
   }
   return (
     
