@@ -1,28 +1,36 @@
 import { useState } from 'react';
-import './login.css'
+import './login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from './../../AuthContext'; // Importe o contexto de autenticação
+
 const Login = () => {
-  const [FormData , SetFormData] = useState({
-    email : '',
-    password : ''
+  const [FormData, SetFormData] = useState({
+    email: '',
+    password: ''
   });
-  const navigate = useNavigate()
-  const handleChange = (e) =>{
-    const {name , value} = e.target;
-    SetFormData({...FormData, [name] :value});
+  const navigate = useNavigate();
+  const { login } = useAuth(); // Use a função de login do contexto de autenticação
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    SetFormData({ ...FormData, [name]: value });
     console.log(FormData);
-  }
-  const handleSubmit = (e) =>{
-    
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    axios.post('http://localhost:8081/login' , FormData)
-    .then(res =>  {
-      navigate('/register');
-    })
-    .catch(err => console.log(err));
-  }
+
+    axios
+      .post('http://localhost:8081/login', FormData)
+      .then((res) => {
+        // Se a autenticação for bem-sucedida, chame a função de login do contexto de autenticação
+        login(res.data); // Você pode passar os dados do usuário (por exemplo, token) para a função login
+        navigate('/dashboard');
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     
     <div className='Divp'>

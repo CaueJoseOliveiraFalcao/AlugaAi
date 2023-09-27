@@ -1,31 +1,18 @@
+// index.js
+
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { RouterProvider , createBrowserRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './App';
+import { AuthProvider } from './AuthContext'; // Importe o provedor de autenticação
 
-import Dashboard from './components/dashboard/dashboard';
-import Login from './components/login/login';
-import Register from './components/register/register';
-
-const router = createBrowserRouter([
-  {
-    path : "/",
-    element : <Login/>
-  },
-  {
-    path : '/register',
-    element : <Register/>
-  },
-  {
-    path : '/Dashboard',
-    element : <Register/>
-  },
-])
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
-  </React.StrictMode>
+    <Router>
+      <AuthProvider> {/* Envolver o aplicativo com o provedor de autenticação */}
+        <App />
+      </AuthProvider>
+    </Router>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-
-
