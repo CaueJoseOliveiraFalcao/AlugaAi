@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from './../../AuthContext'; // Importe o contexto de autenticação
 
 const Login = () => {
   const [FormData, SetFormData] = useState({
@@ -10,12 +9,10 @@ const Login = () => {
     password: ''
   });
   const navigate = useNavigate();
-  const { login } = useAuth(); // Use a função de login do contexto de autenticação
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     SetFormData({ ...FormData, [name]: value });
-    console.log(FormData);
   };
 
   const handleSubmit = (e) => {
@@ -24,9 +21,13 @@ const Login = () => {
     axios
       .post('http://localhost:8081/login', FormData)
       .then((res) => {
-        // Se a autenticação for bem-sucedida, chame a função de login do contexto de autenticação
-        login(res.data); // Você pode passar os dados do usuário (por exemplo, token) para a função login
-        navigate('/dashboard');
+        console.log(res.data)
+        if(res.data === 'Sucess'){
+          navigate('/dashboard')
+        }
+        else {
+          alert('Credenciais invalidas')
+        }
       })
       .catch((err) => console.log(err));
   };
