@@ -3,11 +3,12 @@ import './login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const [FormData, SetFormData] = useState({
     email: '',
     password: ''
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,12 +18,16 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     axios
       .post('http://localhost:8081/login', FormData)
       .then((res) => {
         console.log(res.data)
-        if(res.data === 'Sucess'){
+        if(res.data.message && res.data.token === "Success"){
+          setUser(true)
+          
+          localStorage.setItem(token , res.data.token);
+
           navigate('/dashboard')
         }
         else {
