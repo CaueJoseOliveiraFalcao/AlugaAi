@@ -1,32 +1,21 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from "react";
+import { Redirect, Switch, Route, Router , Outlet } from "react-router-dom";
 import Login from './components/login/login';
 import Register from './components/register/register';
 import Dashboard from './components/dashpage/dashboard'; // Use 'Dashboard', com D maiúsculo
 import { useState } from 'react';
-import { PrivateRoute } from './privateRoute';
+import { history } from "./ult/history";
+import RouteGuard from "./components/RouteGuard";
 
-
-
-function App() {
-  localStorage.setItem('autenticated' , 'true');
-  const  authenticated = localStorage.getItem('autenticated')  === 'true'
-  const [user, setUser] = useState(authenticated);
-  console.log(user)
+function App() { 
   return (
       <div className="App">
         <BrowserRouter>
-           <Routes>
-              <Route path="/" element={<Login setUser={setUser} />} />
+           <Routes history={history}>
+              <Route path="/" element={<Login/>} />
               <Route path="/register" element={<Register />} />
               <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute user={user}>
-                    <Dashboard />
-                  </PrivateRoute>
-              }
-              />
+                path="/dashboard" element={<Dashboard />}/>
            </Routes>
         </BrowserRouter>
       </div>
@@ -34,3 +23,4 @@ function App() {
 }
 
 export default App;
+
